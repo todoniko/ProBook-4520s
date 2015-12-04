@@ -1,0 +1,2 @@
+[devfsrules_common=7]
+add path 'da[0-9]\*' mode 666
