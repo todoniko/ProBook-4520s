@@ -1455,7 +1455,7 @@ DefinitionBlock ("/tmp/acpidump.aml", "DSDT", 2, "HPQOEM", "1411    ", 0x0000000
         {
             Method (_CRT, 0, Serialized)  // _CRT: Critical Temperature
             {
-                Return (GETP (0x01, 0x00))
+                Return (3681) //Return (GETP (0x01, 0x00))
             }
 
             Method (_TMP, 0, Serialized)  // _TMP: Temperature
@@ -1468,14 +1468,15 @@ DefinitionBlock ("/tmp/acpidump.aml", "DSDT", 2, "HPQOEM", "1411    ", 0x0000000
                 }
 
                 Return (Local0)
-            }
 
+            }
+	    Method (_HOT) { Return (3631) } // 90C
             /* _ACx States */
-            Method (_AC0) { Return (3581) } // 85C
-            Method (_AC1) { Return (3531) } // 80C
-            Method (_AC2) { Return (3481) } // 75C
-            Method (_AC3) { Return (3381) } // 65C
-            Method (_AC4) { Return (3231) } // 50C
+            Method (_AC0) { Return (3432) } // 70C
+            Method (_AC1) { Return (3382) } // 65C
+            Method (_AC2) { Return (3332) } // 60C
+            Method (_AC3) { Return (3282) } // 55C
+            Method (_AC4) { Return (3232) } // 50C
 
             /* _ALx Resources for _ACx states */
             Name (_AL0, Package() { \_SB.PCI0.LPCB.EC0.FAN0 })
@@ -1570,8 +1571,9 @@ DefinitionBlock ("/tmp/acpidump.aml", "DSDT", 2, "HPQOEM", "1411    ", 0x0000000
                 }
 
                 Return (Local0)
-            }
-        }
+
+           }
+          }
 
         ThermalZone (BATZ)
         {
@@ -6490,35 +6492,35 @@ DefinitionBlock ("/tmp/acpidump.aml", "DSDT", 2, "HPQOEM", "1411    ", 0x0000000
                     PowerResource(FNP0, 0, 0){
                         Method(_STA) { Return (CFAN) }
                         Method(_ON)  { SFSD(0) }
-                        Method(_OFF) { SFSD(20) }
+                        Method(_OFF) { SFSD(5) }
                     }
 
                     /* FAN Cooling mode for AC1 */
                     PowerResource(FNP1, 0, 0){
                         Method(_STA) { Return (CFAN) }
-                        Method(_ON)  { SFSD(30) }
-                        Method(_OFF) { SFSD(50) }
+                        Method(_ON)  { SFSD(10) }
+                        Method(_OFF) { SFSD(20) }
                     }
 
                     /* FAN Cooling mode for AC2 */
                     PowerResource(FNP2, 0, 0){
                         Method(_STA) { Return (CFAN) }
-                        Method(_ON)  { SFSD(60) }
-                        Method(_OFF) { SFSD(70) }
+                        Method(_ON)  { SFSD(30) }
+                        Method(_OFF) { SFSD(40) }
                     }
 
                     /* FAN Cooling mode for AC3 */
                     PowerResource(FNP3, 0, 0){
                         Method(_STA) { Return (CFAN) }
-                        Method(_ON)  { SFSD(75) }
-                        Method(_OFF) { SFSD(70) }
+                        Method(_ON)  { SFSD(50) }
+                        Method(_OFF) { SFSD(60) }
                     }
 
                     /* FAN Cooling mode for AC4 */
                     PowerResource(FNP4, 0, 0){
                         Method(_STA) { Return (CFAN) }
-                        Method(_ON)  { SFSD(70) }
-                        Method(_OFF) { SFSD(90) }
+                        Method(_ON)  { SFSD(65) }
+                        Method(_OFF) { SFSD(70) }
                     }
 
                     Device (FAN0){
@@ -6566,7 +6568,6 @@ DefinitionBlock ("/tmp/acpidump.aml", "DSDT", 2, "HPQOEM", "1411    ", 0x0000000
                         Release (ECMX)
                     }
 
-/* proprietary use only
                     Method (KSFS, 1, NotSerialized)
                     {
                         Acquire (ECMX, 0xFFFF)
@@ -6589,7 +6590,7 @@ DefinitionBlock ("/tmp/acpidump.aml", "DSDT", 2, "HPQOEM", "1411    ", 0x0000000
                         Release (ECMX)
                         Return (Local0)
                     }
-*/
+
                     /* Read Fan Speed */
                     Method (KRFS, 0, NotSerialized)
                     {
