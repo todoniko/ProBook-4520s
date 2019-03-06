@@ -1472,11 +1472,11 @@ DefinitionBlock ("/tmp/acpidump.aml", "DSDT", 2, "HPQOEM", "1411    ", 0x0000000
             }
 	    Method (_HOT) { Return (3631) } // 90C
             /* _ACx States */
-            Method (_AC0) { Return (3432) } // 70C
-            Method (_AC1) { Return (3382) } // 65C
-            Method (_AC2) { Return (3332) } // 60C
-            Method (_AC3) { Return (3282) } // 55C
-            Method (_AC4) { Return (3232) } // 50C
+            Method (_AC0) { Return (3382) } // 65C
+            Method (_AC1) { Return (3332) } // 60C
+            Method (_AC2) { Return (3282) } // 55C
+            Method (_AC3) { Return (3232) } // 50C
+            Method (_AC4) { Return (3132) } // 40C
 
             /* _ALx Resources for _ACx states */
             Name (_AL0, Package() { \_SB.PCI0.LPCB.EC0.FAN0 })
@@ -6491,36 +6491,36 @@ DefinitionBlock ("/tmp/acpidump.aml", "DSDT", 2, "HPQOEM", "1411    ", 0x0000000
                     /* FAN Cooling mode for AC0 */
                     PowerResource(FNP0, 0, 0){
                         Method(_STA) { Return (CFAN) }
-                        Method(_ON)  { SFSD(0) }
-                        Method(_OFF) { SFSD(5) }
+                        Method(_ON)  { SFSD(1) }
+                        Method(_OFF) { SFSD(10) }
                     }
 
                     /* FAN Cooling mode for AC1 */
                     PowerResource(FNP1, 0, 0){
                         Method(_STA) { Return (CFAN) }
-                        Method(_ON)  { SFSD(10) }
-                        Method(_OFF) { SFSD(20) }
+                        Method(_ON)  { SFSD(20) }
+                        Method(_OFF) { SFSD(10) }
                     }
 
                     /* FAN Cooling mode for AC2 */
                     PowerResource(FNP2, 0, 0){
                         Method(_STA) { Return (CFAN) }
-                        Method(_ON)  { SFSD(30) }
+                        Method(_ON)  { SFSD(55) }
                         Method(_OFF) { SFSD(40) }
                     }
 
                     /* FAN Cooling mode for AC3 */
                     PowerResource(FNP3, 0, 0){
                         Method(_STA) { Return (CFAN) }
-                        Method(_ON)  { SFSD(50) }
+                        Method(_ON)  { SFSD(65) }
                         Method(_OFF) { SFSD(60) }
                     }
 
                     /* FAN Cooling mode for AC4 */
                     PowerResource(FNP4, 0, 0){
                         Method(_STA) { Return (CFAN) }
-                        Method(_ON)  { SFSD(65) }
-                        Method(_OFF) { SFSD(70) }
+                        Method(_ON)  { SFSD(70) }
+                        Method(_OFF) { SFSD(80) }
                     }
 
                     Device (FAN0){
